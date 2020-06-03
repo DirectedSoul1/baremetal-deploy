@@ -152,3 +152,14 @@ NOT* approve them, therewise you will face even more issues.
 # If you see Subject Name: localhost.localdomain remove the csr
 [kni@provisioner ~]$ oc delete csr <wrong_csr>
 ----
+
+== Deployment failures due to VIP's being used by rogue nodes 
+
+When re-deploying the cluster with same name please make sure to turn off all the nodes including the once from previous install. 
+Reason: When a rogue node is left in `ON` state, the VIP's are still being used by them and the deployment fails because of VRID conflict(due to same cluster name) and VRRP errors in the keepalived logs. 
+Ex:
++
+[source,bash]
+---
+Event(v1.ObjectReference{Kind:"Deployment", Namespace:"openshift-authentication-operator", Name:"authentication-operator", UID:"225c5bd5-b368-439b-9155-5fd3c0459d98", APIVersion:"apps/v1", ResourceVersion:"", FieldPath:""}): type: 'Normal' reason: 'OperatorStatusChanged' Status for clusteroperator/authentication changed: Degraded message changed from "IngressStateEndpointsDegraded: All 2 endpoints for oauth-server are reporting 
+---
