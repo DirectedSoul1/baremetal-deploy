@@ -16,6 +16,7 @@ and the `bmc` `address` parameter for the `install-config.yaml` file.
 provisioning network. ({product-title} 4.4 only)
 | `hosts` |  | Details about bare metal hosts to use to build the cluster.
 | `defaultMachinePlatform` | | The default configuration used for machine pools without a platform configuration.
+| `disableCertificateVerification` | False | This parameter is needed when we use `redfish` or `redfish-virtualmedia` to manage BMC addresses. The value should be `True` if you are using self-signed certificate for BMC addresses. 
 | `apiVIP` | `api.<clusterdomain>` | The VIP to use for internal API communication.
 
 This setting must either be provided or pre-configured in DNS so that the
